@@ -36,23 +36,14 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Contributions Pixel Art")
-
+        self.setGeometry(100, 60, 1000, 400)
         layout = QVBoxLayout()
         widgets = [
-            QCheckBox,
             QComboBox,
             QDateEdit,
             QDateTimeEdit,
-            QDoubleSpinBox,
-            QFontComboBox,
-            QLCDNumber,
             QLabel,
-            QLineEdit,
-            QProgressBar,
             QPushButton,
-            QRadioButton,
-            QSlider,
-            QSpinBox,
             QTimeEdit,
         ]
 
