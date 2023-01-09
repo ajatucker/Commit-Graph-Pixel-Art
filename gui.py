@@ -36,26 +36,41 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Contributions Pixel Art")
-        self.setGeometry(100, 60, 1000, 400)
-        layout = QVBoxLayout()
-        widgets = [
-            QComboBox,
-            QDateEdit,
-            QDateTimeEdit,
-            QLabel,
-            QPushButton,
-            QTimeEdit,
-        ]
+        self.setGeometry(100, 60, 1429, 400)
+ 
+        # widgets = [
+        #     QComboBox,
+        #     QDateEdit,
+        #     QDateTimeEdit,
+        #     QLabel,
+        #     QPushButton,
+        #     QTimeEdit,
+        # ]
+        i = 1
+        j = 1
+        day_count = 0
+        for i in range(53):
+            for j in range(7):
+                day_count = day_count + 1
+                num = str(day_count)
+                newBtn = QPushButton(num, self)
+                newBtn.resize(25, 25)
+                newBtn.move(i*27, j*27)
+                newBtn.show()
+                if(day_count == 365):
+                    break
+            if(day_count == 365):
+                    break
 
-        for w in widgets:
-            layout.addWidget(w())
 
-        widget = QWidget()
-        widget.setLayout(layout)
+
+        # for w in widgets:
+        #     layout.addWidget(w())
+
 
         # Set the central widget of the Window. Widget will expand
         # to take up all the space in the window by default.
-        self.setCentralWidget(widget)
+        #self.setCentralWidget(widget)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
