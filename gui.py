@@ -1,4 +1,5 @@
 from sre_parse import State
+from turtle import color
 from PyQt5.QtWidgets import QApplication, QWidget, QToolButton, QMainWindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
@@ -37,7 +38,23 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         def button_click(self):
-            self.sender().setStyleSheet("background-color : #ffffff")
+            print(self.sender().styleSheet())
+            style = self.sender().styleSheet()
+
+            if (style == "") :
+                self.sender().setStyleSheet("background-color : #9be9a8")
+            elif (style == "background-color : #9be9a8"):
+                self.sender().setStyleSheet("background-color : #40c463")
+            elif (style == "background-color : #40c463"):
+                self.sender().setStyleSheet("background-color : #30a14e")
+            elif (style == "background-color : #30a14e"):
+                self.sender().setStyleSheet("background-color : #216e39")
+            else:
+                self.sender().setStyleSheet("")
+            
+
+
+
 
         self.setWindowTitle("Contributions Pixel Art")
         self.setGeometry(100, 60, 1429, 400)
