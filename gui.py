@@ -1,3 +1,4 @@
+from sre_parse import State
 from PyQt5.QtWidgets import QApplication, QWidget, QToolButton, QMainWindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
@@ -36,7 +37,7 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         def button_click(self):
-            self.setStyleSheet("background-color : red")
+            self.sender().setStyleSheet("background-color : #ffffff")
 
         self.setWindowTitle("Contributions Pixel Art")
         self.setGeometry(100, 60, 1429, 400)
@@ -60,7 +61,7 @@ class MainWindow(QMainWindow):
                 newBtn.resize(25, 25)
                 newBtn.move(i*27, j*27)
                 newBtn.show()
-                newBtn.clicked.connect(lambda checked: button_click(newBtn))
+                newBtn.clicked.connect(lambda state, x=day_count: button_click(newBtn))
                 if(day_count == 365):
                     break
             if(day_count == 365):
