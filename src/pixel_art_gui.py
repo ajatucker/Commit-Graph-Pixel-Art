@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QToolButton, QMainWindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 import sys
+from pixel_art_logic import *
 from datetime import datetime
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
@@ -29,22 +30,6 @@ from PyQt5.QtWidgets import (
     QWidget
 )
 
-class CommitList():
-   def __init__(self, c_list):
-        self.c_list = []
-   def add_to_list(self, num):
-        self.c_list.append(num)
-
-class CommitSolver():
-    def solve_datetime(self, num):
-        num.rjust(3 + len(num), '0')
-        curr_year = "2023"
-        res = datetime.strptime(curr_year + "-" + num, "%Y-%j").strftime("%Y-%m-%d")
-        str_res = str(res) + " 20:00"
-        return str_res
-
-    #def make_commit(self):
-
 
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QMainWindow):
@@ -66,12 +51,20 @@ class MainWindow(QMainWindow):
             else:
                 self.sender().setStyleSheet("background-color : #e6eef1")
 
+        def button_clear(self, b_list):
+            print("Cleared")
+            for b in b_list:
+                b.setStyleSheet("background-color : #e6eef1")
+
+
         self.setStyleSheet("background-color : #333333")
         self.setWindowTitle("Contributions Pixel Art")
         self.setGeometry(100, 60, 1429, 400)
 
+
         solve = CommitSolver()
 
+        button_list = []
         i = 1
         j = 1
         day_count = 0
@@ -85,6 +78,7 @@ class MainWindow(QMainWindow):
                 newBtn.setToolTip(solve.solve_datetime(str(day_count)))
                 newBtn.show()
                 newBtn.clicked.connect(lambda state, x=day_count: button_click(newBtn))
+                button_list.append(newBtn)
                 if(day_count == 365):
                     break
             if(day_count == 365):
@@ -95,6 +89,7 @@ class MainWindow(QMainWindow):
         commitBtn.resize(200, 100)
         commitBtn.move(475, 250)
         clearBtn = QPushButton("Clear", self)
+        clearBtn.clicked.connect(lambda state, x=button_list: button_clear(clearBtn, button_list))
         clearBtn.setStyleSheet("background-color : #BD2C00")
         clearBtn.resize(200, 100)
         clearBtn.move(750, 250)
