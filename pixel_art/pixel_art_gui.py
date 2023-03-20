@@ -36,6 +36,23 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        def button_commit(self, b_list, sol):
+            for b in b_list:
+                style = b.styleSheet()
+                loop_num = 0
+
+                if (style == "background-color : #9be9a8") :
+                    print("commit once")
+                elif (style == "background-color : #40c463"):
+                    loop_num = 4
+                elif (style == "background-color : #30a14e"):
+                    loop_num = 9
+                elif (style == "background-color : #216e39"):
+                    loop_num = 14
+                
+                commits = CommitList()
+                commits.build_list(loop_num, b)
+
         def button_click(self):
             print(self.sender().styleSheet())
             style = self.sender().styleSheet()
@@ -85,6 +102,7 @@ class MainWindow(QMainWindow):
                     break
         
         commitBtn = QPushButton("Commit!", self)
+        commitBtn.clicked.connect(lambda state, x=button_list: button_commit(commitBtn, button_list, solve))
         commitBtn.setStyleSheet("background-color : #4183C4")
         commitBtn.resize(200, 100)
         commitBtn.move(475, 250)
